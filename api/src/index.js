@@ -10,5 +10,6 @@ app.use('/', graphqlHTTP({
   graphiql: true,
 }));
 
-app.listen(PORT)
-  .then(() => { console.log(`Listening on port ${PORT}`); });
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+})
