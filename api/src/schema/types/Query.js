@@ -1,0 +1,7 @@
+/**
+ * query {
+ *  popularMovies(page: Int) {
+ *    
+ *  }
+ * }
+ */

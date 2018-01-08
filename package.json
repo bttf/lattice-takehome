@@ -1,0 +1,8 @@
+{
+  "name": "lattice",
+  "version": "0.0.1",
+  "description": "practice question for lattice, by adnan",
+  "main": "index.js",
+  "author": "bttf",
+  "license": "MIT"
+}
