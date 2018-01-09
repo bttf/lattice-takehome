@@ -30,17 +30,9 @@ export default class App extends Component {
     const query = gql`{
       popularMovies(page: ${page}) {
         id
-        backdrop_path
-        budget
-        homepage
         overview
         original_title
         poster_path
-        release_date
-        status
-        tagline
-        vote_average
-        vote_count
       }
     }`;
 
@@ -65,17 +57,9 @@ export default class App extends Component {
     const gqlQuery = gql`{
       movies(query: "${query}", page: ${page}) {
         id
-        backdrop_path
-        budget
-        homepage
         overview
         original_title
         poster_path
-        release_date
-        status
-        tagline
-        vote_average
-        vote_count
       }
     }`;
 
@@ -93,6 +77,30 @@ export default class App extends Component {
 
   selectMovie(selectedMovie) {
     this.setState({ selectedMovie });
+
+    const gqlQuery = gql`{
+      movie(id: ${selectedMovie.id}) {
+        id
+        backdrop_path
+        budget
+        homepage
+        imdb_id
+        overview
+        original_title
+        poster_path
+        release_date
+        runtime
+        status
+        tagline
+        vote_average
+        vote_count
+      }
+    }`;
+
+    this.props.client.query({ query: gqlQuery }).then(response => {
+      const movie = response.data.movie;
+      this.setState({ selectedMovie: movie });
+    });
   }
 
   clearSelectedMovie() {

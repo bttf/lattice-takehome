@@ -18,3 +18,4 @@
 4. navigate to `client/`
 5. run `npm install` or `yarn`
 6. run `npm run watch` or `yarn watch`
+7. access `http://localhost:8080` in your browser

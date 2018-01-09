@@ -40,9 +40,20 @@
       font-size: 3rem;
     }
 
+    .tagline {
+      font-size: 1.5rem;
+      font-style: italic;
+      padding: .5rem 0;
+    }
+
     .overview {
       padding: 1rem 0;
       font-size: 1.2rem;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
     }
   }
 }
