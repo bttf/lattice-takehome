@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchBar from './components/SearchBar';
 import MoviePanel from './components/MoviePanel';
+import MovieDetails from './components/MovieDetails';
 import gql from 'graphql-tag';
 import './App.scss';
 
@@ -12,9 +13,12 @@ export default class App extends Component {
       movies: [],
       currentPage: 1,
       searchQuery: '',
+      selectedMovie: null,
     };
 
+    this.selectMovie = this.selectMovie.bind(this);
     this.searchMovies = this.searchMovies.bind(this);
+    this.clearSelectedMovie = this.clearSelectedMovie.bind(this);
   }
 
   componentDidMount() {
@@ -32,6 +36,9 @@ export default class App extends Component {
         overview
         original_title
         poster_path
+        release_date
+        status
+        tagline
         vote_average
         vote_count
       }
@@ -40,6 +47,7 @@ export default class App extends Component {
     this.setState({
       movies: [],
       searchQuery: '',
+      selectedMovie: null,
     });
 
     this.props.client.query({ query }).then(response => {
@@ -63,6 +71,9 @@ export default class App extends Component {
         overview
         original_title
         poster_path
+        release_date
+        status
+        tagline
         vote_average
         vote_count
       }
@@ -71,6 +82,7 @@ export default class App extends Component {
     this.setState({
       movies: [],
       searchQuery: query,
+      selectedMovie: null,
     });
 
     this.props.client.query({ query: gqlQuery }).then(response => {
@@ -79,20 +91,42 @@ export default class App extends Component {
     });
   }
 
+  selectMovie(selectedMovie) {
+    this.setState({ selectedMovie });
+  }
+
+  clearSelectedMovie() {
+    this.setState({ selectedMovie: null });
+  }
+
   render() {
     const searchQuery = this.state.searchQuery;
+
+    const moviesList = (
+      <div className="movies">
+        <h1>
+          {this.state.selectedMovie ? 'selected' : ''}
+          {searchQuery.length ? `Movie results for '${searchQuery}':` : 'Popular Movies'}
+        </h1>
+        {this.state.movies.length ?
+            this.state.movies.map((movie, index) =>
+              (<MoviePanel
+                key={movie.id}
+                index={index}
+                movie={movie}
+                selectMovie={this.selectMovie}
+              />)) : 'Loading'}
+      </div>
+    );
 
     return (
       <div className="application">
         <SearchBar searchMovies={this.searchMovies} />
-        <div className="movies">
-          <h1>
-            {searchQuery.length ? `Movie results for '${searchQuery}':` : 'Popular Movies'}
-          </h1>
-          {this.state.movies.length ?
-              this.state.movies.map((movie, index) =>
-                (<MoviePanel key={movie.id} index={index} movie={movie} />)) : 'Loading'}
-        </div>
+        {this.state.selectedMovie ?
+            <MovieDetails
+              movie={this.state.selectedMovie}
+              clearSelectedMovie={this.clearSelectedMovie}
+            /> : moviesList}
       </div>
     );
   }

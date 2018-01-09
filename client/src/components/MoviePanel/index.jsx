@@ -2,11 +2,20 @@ import React, { PureComponent } from 'react';
 import './styles.scss';
 
 export default class MoviePanel extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.clickHandler = this.clickHandler.bind(this);
+  }
+
   componentDidMount() {
     setTimeout(() => {
       if (!this.refs.panel) return;
       this.refs.panel.className = this.refs.panel.className.concat(' visible');
-    }, 500 + (this.props.index * 100));
+    }, 100 + (this.props.index * 100));
+  }
+
+  clickHandler() {
+    this.props.selectMovie(this.props.movie);
   }
 
   render() {
@@ -14,7 +23,7 @@ export default class MoviePanel extends PureComponent {
       `https://image.tmdb.org/t/p/w500/${this.props.movie.poster_path}`;
 
     return (
-      <div ref="panel" className="movie-panel">
+      <div ref="panel" className="movie-panel" onClick={this.clickHandler}>
         <div className="poster">
           <img src={posterPath} alt="" />
         </div>
