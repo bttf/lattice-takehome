@@ -2,6 +2,11 @@ import React, { PureComponent } from 'react';
 import './styles.scss';
 
 export default class MovieDetails extends PureComponent {
+  componentDidMount() {
+    // quick hack to make sure browser is at top of page on load
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }
+
   render() {
     const movie = this.props.movie;
 

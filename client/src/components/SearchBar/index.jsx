@@ -19,7 +19,7 @@ export default class SearchBar extends PureComponent {
   render() {
     return (
       <div className="search-bar">
-        <input type="text" onChange={this.changeHandler} placeholder="Enter a name to search for movies" />
+        <input type="text" onChange={this.changeHandler} placeholder="Search movie titles" />
       </div>
     );
   }

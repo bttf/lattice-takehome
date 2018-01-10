@@ -3,7 +3,11 @@
   align-items: space-evenly;
 
   margin: 1rem 0;
-  padding: 1rem .5rem;
+  padding: 1rem 0;
+
+  @media(min-width: 600px) {
+    padding: 1rem .5rem;
+  }
 
   cursor: pointer;
 
@@ -25,6 +29,12 @@
   }
 
   .poster {
+    display: none; 
+
+    @media(min-width: 400px) {
+      display: block;
+    }
+
     width: 100px;
     min-height: 145px;
 
