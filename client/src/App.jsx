@@ -113,7 +113,6 @@ export default class App extends Component {
     const moviesList = (
       <div className="movies">
         <h1>
-          {this.state.selectedMovie ? 'selected' : ''}
           {searchQuery.length ? `Movie results for '${searchQuery}':` : 'Popular Movies'}
         </h1>
         {this.state.movies.length ?

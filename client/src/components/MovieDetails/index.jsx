@@ -15,15 +15,15 @@ export default class MovieDetails extends PureComponent {
         </div>
         <div className="body">
           <div className="title">{movie.original_title}</div>
-          {movie.tagline ? <div className="tagline">"{movie.tagline}"</div> : ''}
-          {movie.status ? <div className="status"><strong>Status: </strong>{movie.status}</div> : ''}
-          {movie.vote_average ? <div className="ratings"><strong>Rating:</strong> {movie.vote_average}/10 <small>({movie.vote_count} votes)</small></div> : ''}
-          {movie.budget ? <div className="budget"><strong>Budget:</strong> ${movie.budget}</div> : ''}
-          {movie.runtime ? <div className="runtime"><strong>Runtime:</strong> {movie.runtime} min</div> : ''}
+          {movie.tagline && <div className="tagline">"{movie.tagline}"</div>}
+          {movie.status && <div className="status"><strong>Status: </strong>{movie.status}</div>}
+          {movie.vote_average && <div className="ratings"><strong>Rating:</strong> {movie.vote_average}/10 <small>({movie.vote_count} votes)</small></div>}
+          {movie.budget && <div className="budget"><strong>Budget:</strong> ${movie.budget}</div>}
+          {movie.runtime && <div className="runtime"><strong>Runtime:</strong> {movie.runtime} min</div>}
           <div className="overview">{movie.overview}</div>
           <div className="links">
-            {movie.homepage ? <div>🔗 <a href={movie.homepage}>Homepage</a></div> : ''}
-            {movie.imdb_id? <div>🔗 <a href={`http://www.imdb.com/title/${movie.imdb_id}`}>IMDB</a></div> : ''}
+            {movie.homepage && <div>🔗 <a href={movie.homepage}>Homepage</a></div>}
+            {movie.imdb_id && <div>🔗 <a href={`http://www.imdb.com/title/${movie.imdb_id}`}>IMDB</a></div>}
           </div>
         </div>
       </div>
